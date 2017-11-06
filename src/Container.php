@@ -20,10 +20,10 @@ class Container implements ContainerInterface
      */
     public static function getInstance($path_config_file = null){
 
-        if(self::$_instance instanceof self)
-            return self::$_instance;
+        if( !(self::$_instance instanceof self) )
+            self::$_instance = new self($path_config_file);
 
-        return new self($path_config_file);
+        return self::$_instance;
 
     }
 
@@ -48,10 +48,14 @@ class Container implements ContainerInterface
      */
     public function get($id)
     {
-        if($this->has($id))
-            return $this->container[$id];
+        if(!$this->has($id))
+            throw new NotFoundException();
 
-        throw new NotFoundException();
+        if(is_callable($this->container[$id]))
+            return $this->container[$id]();
+
+        return $this->container[$id];
+
     }
 
     /**
