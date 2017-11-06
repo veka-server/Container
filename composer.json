@@ -1,0 +1,20 @@
+{
+    "name": "veka-server/container",
+    "description": "Une classe de container compatible PSR",
+    "license": "MIT",
+    "keywords": ["container"],
+    "authors": [
+        {
+            "name": "Vanhaezebrouck Nicolas",
+            "email": "contact@veka-server.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "VekaServer\\Container\\" : "src/"
+        }
+    },
+    "require": {
+        "psr/container": "^1.0"
+    }
+}
